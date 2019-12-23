@@ -8,7 +8,7 @@ force-build:
 
 provision:
 	kubectl create namespace seldon
-	kubectl config set-context $(kubectl config current-context) --namespace=seldon
+	kubectl config set-context --current --namespace=seldon
 
 	kubectl create namespace seldon-system
 	helm install seldon-core seldon-core-operator \
@@ -19,6 +19,6 @@ provision:
 
 	helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 	helm repo update
-	helm install ambassador stable/ambassador --set crds.keep=false --namespace seldon
 
+	helm install ambassador stable/ambassador --set crds.keep=false --namespace seldon
 	kubectl rollout status deployment.apps/ambassador
