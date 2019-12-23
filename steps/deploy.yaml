@@ -1,0 +1,49 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: step-experiments
+spec:
+  annotations:
+    project_name: Iris classification
+  name: three-steps
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: seldon-experiments:step-1
+          name: step-one
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+        - image: seldon-experiments:step-2
+          name: step-two
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+        - image: seldon-experiments:step-3
+          name: step-three
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+    graph:
+      children:
+      - children:
+        - endpoint:
+            type: REST
+          name: step-three
+          type: MODEL
+        endpoint:
+          type: REST
+        name: step-two
+        type: MODEL
+      endpoint:
+        type: REST
+      name: step-one
+      type: MODEL
+    name: steps-graph
+    replicas: 1
