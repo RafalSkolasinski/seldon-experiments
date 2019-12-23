@@ -8,28 +8,25 @@ Inspired by Alejandro's [seldon-experiments](https://github.com/axsaucedo/seldon
 
 To run execute:
 
-    make build_images_minikube
+    make minikube_images
     make deploy
     make send_request
 
 To reload:
 
-    make build_images_minikube
-    make reload
+    make minikube_images
+    make restart
 
 
 # Kind
 
 To run execute:
 
-    make build_images
-    make load_kind
-
+    make kind_images
     make deploy
     make send_request
 
 Every time there is a change you can just run
 
-    make build_images
-    make load_kind
+    make kind_images
     make reload
