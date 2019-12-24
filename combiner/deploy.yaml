@@ -1,0 +1,50 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: combiner-experiments
+spec:
+  annotations:
+    project_name: Iris classification
+  name: combiner-experiments
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: seldon-experiments:model-1
+          name: model-one
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+        - image: seldon-experiments:model-2
+          name: model-two
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+        - image: seldon-experiments:combiner
+          name: combiner
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+    graph:
+      children:
+      - children: []
+        endpoint:
+          type: REST
+        name: model-one
+        type: MODEL
+      - children: []
+        endpoint:
+          type: REST
+        name: model-two
+        type: MODEL
+      endpoint:
+        type: REST
+      name: combiner
+      type: COMBINER
+    name: combiner-graph
+    replicas: 1
