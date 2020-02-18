@@ -1,16 +1,31 @@
-SELDON_CORE_OPERATOR_VERSION ?= master
-
 DIR:=$(dir $(realpath $(firstword $(MAKEFILE_LIST))))
 TEMPRESOURCES_DIR:=$(DIR)/tmp_resources
 
+SELDON_CORE_OPERATOR_VERSION ?= master
+SELDON_COPRE_OPERATOR_NAMESPACE ?= seldon-system
+
+ENGINE_IMAGE ?= seldonio/engine
+ENGINE_VERSION ?= 1.0.3-SNAPSHOT
+
+EXECUTOR_IMAGE ?= seldonio/seldon-core-executor
+EXECUTOR_VERSION ?= 1.0.3-SNAPSHOT
+
+
+EXECUTOR_ENABLED ?= false
+AMBASSADOR_ENABLED ?= true
+
 
 seldon-core-operator: clone-seldon-core
-	helm delete seldon-core --namespace seldon-system || echo "seldon-core not installed"
-	kubectl create namespace seldon-system || echo "namespace seldon-system exists"
+	helm delete seldon-core --namespace ${SELDON_COPRE_OPERATOR_NAMESPACE} || echo "seldon-core not installed"
+	kubectl create namespace ${SELDON_COPRE_OPERATOR_NAMESPACE} || echo "namespace ${SELDON_COPRE_OPERATOR_NAMESPACE} exists"
 	helm install seldon-core ${TEMPRESOURCES_DIR}/seldon-core/helm-charts/seldon-core-operator \
-		--set ambassador.enabled=true \
-		--set executor.enabled=true \
-		--namespace seldon-system
+		--set ambassador.enabled=${AMBASSADOR_ENABLED} \
+		--set executor.enabled=${EXECUTOR_ENABLED} \
+		--set engine.image.repository=${ENGINE_IMAGE} \
+		--set engine.image.tag=${ENGINE_VERSION} \
+		--set executor.image.repository=${EXECUTOR_IMAGE} \
+		--set executor.image.tag=${EXECUTOR_VERSION} \
+		--namespace ${SELDON_COPRE_OPERATOR_NAMESPACE}
 
 
 clone-seldon-core: tempresources-dir
