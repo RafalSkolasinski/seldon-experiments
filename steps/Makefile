@@ -1,4 +1,4 @@
-all:
+KIND_NAME ?= seldon
 
 .ONESHELL:
 
@@ -19,9 +19,9 @@ restart:
 
 kind_images:
 	make images
-	kind load docker-image seldon-experiments:step-1 --name experiments
-	kind load docker-image seldon-experiments:step-2 --name experiments
-	kind load docker-image seldon-experiments:step-3 --name experiments
+	kind load docker-image seldon-experiments:step-1 --name ${KIND_NAME}
+	kind load docker-image seldon-experiments:step-2 --name ${KIND_NAME}
+	kind load docker-image seldon-experiments:step-3 --name ${KIND_NAME}
 
 kind_reload:
 	make kind_images
@@ -37,7 +37,7 @@ minikube_reload:
 	make restart
 
 
-send_request:
+request:
 	curl -X POST -H 'Content-Type: application/json' \
 		-d "{'data': {'names': ['get'], 'ndarray': ['data']}}" \
 		http://localhost:8003/seldon/seldon/step-experiments/api/v0.1/predictions

@@ -5,9 +5,9 @@ metadata:
     app: seldon
   name: step-experiments
 spec:
-  annotations:
-    project_name: Iris classification
   name: three-steps
+  annotations:
+    seldon.io/executor: "true"
   predictors:
   - componentSpecs:
     - spec:

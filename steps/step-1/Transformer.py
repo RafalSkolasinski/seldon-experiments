@@ -9,11 +9,10 @@ class Transformer():
         logging.warning(X)
         logging.warning(feature_names)
         logging.warning(meta)
-        self._tags["value"] = X.tolist()
+        self._tags["value_at_one"] = X.tolist()
         self._tags["current"] = "one"
         self._tags["one"] = "yes"
         return ["one"]
 
     def tags(self):
         return self._tags
-
