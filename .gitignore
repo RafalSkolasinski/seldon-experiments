@@ -1,3 +1,4 @@
+seldon-core/tmp_resources
 .ipynb_checkpoints
 *.pyc
 __pycache__

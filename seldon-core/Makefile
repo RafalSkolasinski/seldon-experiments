@@ -27,6 +27,11 @@ seldon-core-operator: clone-seldon-core
 		--set executor.image.tag=${EXECUTOR_VERSION} \
 		--namespace ${SELDON_COPRE_OPERATOR_NAMESPACE}
 
+ambassador:
+	kubectl create namespace ambassador || echo "namespace ambassador exists"
+	helm install ambassador stable/ambassador \
+		--set crds.keep=false \
+		--namespace ambassador
 
 clone-seldon-core: tempresources-dir
 	git clone https://github.com/SeldonIO/seldon-core.git tmp_resources/seldon-core -b ${SELDON_CORE_OPERATOR_VERSION}
