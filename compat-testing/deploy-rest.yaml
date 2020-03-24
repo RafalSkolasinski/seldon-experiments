@@ -2,7 +2,7 @@ apiVersion: machinelearning.seldon.io/v1
 kind: SeldonDeployment
 metadata:
   labels:
-    app: seldon
+    app: seldoncompat
   name: seldon-mock-model-019-snapshot-executor
 spec:
   annotations:
@@ -12,7 +12,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.19-SNAPSHOT
+        - image: compat-rest-model:0.19-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -31,7 +31,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-019-snapshot-engine
+  name: compat-rest-model-019-snapshot-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -40,7 +40,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.19-SNAPSHOT
+        - image: compat-rest-model:0.19-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -63,7 +63,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-018-executor
+  name: compat-rest-model-018-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -72,7 +72,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.18
+        - image: compat-rest-model:0.18
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -91,7 +91,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-018-engine
+  name: compat-rest-model-018-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -100,7 +100,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.18
+        - image: compat-rest-model:0.18
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -123,7 +123,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-017-executor
+  name: compat-rest-model-017-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -132,7 +132,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.17
+        - image: compat-rest-model:0.17
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -151,7 +151,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-017-engine
+  name: compat-rest-model-017-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -160,7 +160,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.17
+        - image: compat-rest-model:0.17
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -183,7 +183,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-016-executor
+  name: compat-rest-model-016-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -192,7 +192,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.16
+        - image: compat-rest-model:0.16
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -211,7 +211,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-016-engine
+  name: compat-rest-model-016-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -220,7 +220,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.16
+        - image: compat-rest-model:0.16
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -243,7 +243,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-015-executor
+  name: compat-rest-model-015-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -252,7 +252,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.15
+        - image: compat-rest-model:0.15
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -271,7 +271,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-015-engine
+  name: compat-rest-model-015-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -280,7 +280,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.15
+        - image: compat-rest-model:0.15
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -303,7 +303,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-014-executor
+  name: compat-rest-model-014-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -312,7 +312,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.14
+        - image: compat-rest-model:0.14
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -331,7 +331,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-014-engine
+  name: compat-rest-model-014-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -340,7 +340,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.14
+        - image: compat-rest-model:0.14
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -363,7 +363,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-013-executor
+  name: compat-rest-model-013-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -372,7 +372,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.13
+        - image: compat-rest-model:0.13
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -391,7 +391,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-013-engine
+  name: compat-rest-model-013-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -400,7 +400,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.13
+        - image: compat-rest-model:0.13
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -424,7 +424,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-012-executor
+  name: compat-rest-model-012-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -433,7 +433,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.12
+        - image: compat-rest-model:0.12
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -452,7 +452,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-012-engine
+  name: compat-rest-model-012-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -461,7 +461,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.12
+        - image: compat-rest-model:0.12
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -485,7 +485,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-011-executor
+  name: compat-rest-model-011-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -494,7 +494,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.11
+        - image: compat-rest-model:0.11
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -513,7 +513,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-011-engine
+  name: compat-rest-model-011-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -522,7 +522,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.11
+        - image: compat-rest-model:0.11
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -546,7 +546,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-010-executor
+  name: compat-rest-model-010-executor
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -555,7 +555,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.10
+        - image: compat-rest-model:0.10
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
@@ -574,7 +574,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-mock-model-010-engine
+  name: compat-rest-model-010-engine
 spec:
   annotations:
     seldon.io/executor: "false"
@@ -583,7 +583,7 @@ spec:
   - componentSpecs:
     - spec:
         containers:
-        - image: compat-mock-model:0.10
+        - image: compat-rest-model:0.10
           imagePullPolicy: IfNotPresent
           name: test-model
     graph:
