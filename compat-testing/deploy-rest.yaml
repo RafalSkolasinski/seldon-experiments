@@ -2,8 +2,8 @@ apiVersion: machinelearning.seldon.io/v1
 kind: SeldonDeployment
 metadata:
   labels:
-    app: seldoncompat
-  name: seldon-mock-model-019-snapshot-executor
+    app: seldon
+  name: compat-rest-model-019-snapshot-executor
 spec:
   annotations:
     seldon.io/executor: "true"
