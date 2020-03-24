@@ -78,83 +78,83 @@ remove-grpc:
 
 request-rest:
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-019-snapshot-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-019-snapshot-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-018-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-018-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-017-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-017-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-016-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-016-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-015-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-015-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-014-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-014-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-013-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-013-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-012-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-012-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-011-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-011-engine/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-010-executor/api/v1.0/predictions \
 		| jq .
 	curl -s -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"foo":"bar", "tags": {"a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"meta": {"tags": {"foo":"bar", "a": -1}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/compat-rest-model-010-engine/api/v1.0/predictions \
 		| jq .
 
