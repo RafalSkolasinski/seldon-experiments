@@ -78,9 +78,12 @@ deploy-rest:
 deploy-grpc:
 	kubectl apply -f deploy-grpc.yaml
 
+deploy-java-rest:
+	kubectl apply -f deploy-java-rest.yaml
 
-deploy-java:
-	kubectl apply -f deploy-java.yaml
+deploy-java-grpc:
+	kubectl apply -f deploy-java-grpc.yaml
+
 
 
 remove-rest:
@@ -89,8 +92,11 @@ remove-rest:
 remove-grpc:
 	kubectl delete -f deploy-grpc.yaml
 
-remove-java:
-	kubectl delete -f deploy-java.yaml
+remove-java-rest:
+	kubectl delete -f deploy-java-rest.yaml
+
+remove-java-grpc:
+	kubectl delete -f deploy-java-grpc.yaml
 
 
 
