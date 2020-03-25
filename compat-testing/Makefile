@@ -58,21 +58,39 @@ kind-load-images-grpc: images-grpc
 
 
 
+images-java:
+	s2i build -E environment_rest ${SELDON_CORE_DIR}/incubating/wrappers/s2i/java/test/model-template-app seldonio/seldon-core-s2i-java-build:0.1 compat-rest-java:0.1 --runtime-image seldonio/seldon-core-s2i-java-runtime:0.1
+	s2i build -E environment_rest ${SELDON_CORE_DIR}/incubating/wrappers/s2i/java/test/model-template-app seldonio/seldon-core-s2i-java-build:0.2 compat-rest-java:0.2 --runtime-image seldonio/seldon-core-s2i-java-runtime:0.2
+
+	s2i build -E environment_grpc ${SELDON_CORE_DIR}/incubating/wrappers/s2i/java/test/model-template-app seldonio/seldon-core-s2i-java-build:0.1 compat-grpc-java:0.1 --runtime-image seldonio/seldon-core-s2i-java-runtime:0.1
+	s2i build -E environment_grpc ${SELDON_CORE_DIR}/incubating/wrappers/s2i/java/test/model-template-app seldonio/seldon-core-s2i-java-build:0.2 compat-grpc-java:0.2 --runtime-image seldonio/seldon-core-s2i-java-runtime:0.2
+
+kind-load-images-java: images-java
+	kind load docker-image compat-rest-java:0.1 --name ${KIND_NAME}
+	kind load docker-image compat-rest-java:0.2 --name ${KIND_NAME}
+	kind load docker-image compat-grpc-java:0.1 --name ${KIND_NAME}
+	kind load docker-image compat-grpc-java:0.2 --name ${KIND_NAME}
+
 
 deploy-rest:
 	kubectl apply -f deploy-rest.yaml
 
-remove-rest:
-	kubectl delete -f deploy-rest.yaml
-
-
-
 deploy-grpc:
 	kubectl apply -f deploy-grpc.yaml
+
+
+deploy-java:
+	kubectl apply -f deploy-java.yaml
+
+
+remove-rest:
+	kubectl delete -f deploy-rest.yaml
 
 remove-grpc:
 	kubectl delete -f deploy-grpc.yaml
 
+remove-java:
+	kubectl delete -f deploy-java.yaml
 
 
 
@@ -180,3 +198,45 @@ request-grpc:
 	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl -d '{"data": {"names": ["get"], "ndarray": ["data"]}}' -rpc-header seldon:compat-grpc-model-011-engine -rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 seldon.protos.Seldon/Predict | jq .
 	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl -d '{"data": {"names": ["get"], "ndarray": ["data"]}}' -rpc-header seldon:compat-grpc-model-010-executor -rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 seldon.protos.Seldon/Predict | jq .
 	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl -d '{"data": {"names": ["get"], "ndarray": ["data"]}}' -rpc-header seldon:compat-grpc-model-010-engine -rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 seldon.protos.Seldon/Predict | jq .
+
+request-java-rest:
+	curl -s -X POST \
+		-d 'json={"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		localhost:8003/seldon/seldon/compat-rest-java-02-executor/api/v1.0/predictions \
+		| jq .
+	curl -s -X POST -H 'Content-Type: application/json' \
+		-d '{"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		localhost:8003/seldon/seldon/compat-rest-java-02-engine/api/v1.0/predictions \
+		| jq .
+
+	curl -s -X POST \
+		-d 'json={"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		localhost:8003/seldon/seldon/compat-rest-java-01-executor/api/v1.0/predictions \
+		| jq .
+	curl -s -X POST -H 'Content-Type: application/json' \
+		-d '{"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		localhost:8003/seldon/seldon/compat-rest-java-01-engine/api/v1.0/predictions \
+		| jq .
+
+request-java-grpc:
+	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl \
+		-d '{"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		-rpc-header seldon:compat-grpc-java-02-executor \
+		-rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 \
+		seldon.protos.Seldon/Predict | jq .
+	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl \
+		-d '{"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		-rpc-header seldon:compat-grpc-java-02-engine \
+		-rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 \
+		seldon.protos.Seldon/Predict | jq .
+
+	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl \
+		-d '{"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		-rpc-header seldon:compat-grpc-java-01-executor \
+		-rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 \
+		seldon.protos.Seldon/Predict | jq .
+	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl \
+		-d '{"data":{"names":["a","b"],"ndarray":[[1.0,2.0]]}}' \
+		-rpc-header seldon:compat-grpc-java-01-engine \
+		-rpc-header namespace:seldon -plaintext -proto ./prediction.proto 0.0.0.0:8003 \
+		seldon.protos.Seldon/Predict | jq .
