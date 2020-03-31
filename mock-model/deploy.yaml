@@ -1,4 +1,4 @@
-apiVersion: machinelearning.seldon.io/v1alpha2
+apiVersion: machinelearning.seldon.io/v1
 kind: SeldonDeployment
 metadata:
   labels:
@@ -7,6 +7,8 @@ metadata:
 spec:
   annotations:
     seldon.io/executor: "true"
+    # prometheus.io/scrape: "true"
+    # prometheus.io/path: /prometheus
   name: mock-deployment
   predictors:
   - componentSpecs:
