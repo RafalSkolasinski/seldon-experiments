@@ -1,0 +1,117 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: seldon-metadata-model-01
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: metadata-deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: metadata-model:latest
+          imagePullPolicy: IfNotPresent
+          name: my-metadata-model
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: MODEL_NAME
+            value: Model01
+    graph:
+      children: []
+      endpoint:
+        type: REST
+      name: my-metadata-model
+      type: MODEL
+    labels:
+      version: v1
+    name: my-metadata-graph
+    replicas: 1
+
+---
+
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: seldon-metadata-model-02
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: metadata-deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: metadata-model:latest
+          imagePullPolicy: IfNotPresent
+          name: my-metadata-model
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: MODEL_NAME
+            value: Model02
+          - name: MODEL_METADATA
+            value: |
+              {"name": "my-model-name",
+               "versions": ["my-model-version-02"],
+               "platform": "seldon-custom",
+               "inputs": [{"name": "input", "datatype": "BYTES", "shape": [1]}],
+               "outputs": [{"name": "output", "datatype": "BYTES", "shape": [1]}]}
+    graph:
+      children: []
+      endpoint:
+        type: REST
+      name: my-metadata-model
+      type: MODEL
+    labels:
+      version: v1
+    name: my-metadata-graph
+    replicas: 1
+
+
+---
+
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: seldon-metadata-model-03
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: metadata-deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: metadata-model:latest
+          imagePullPolicy: IfNotPresent
+          name: my-metadata-model
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: MODEL_NAME
+            value: Model03
+          - name: MODEL_METADATA
+            value: |
+              {"name": "my-model-name",
+               "versions": ["my-model-version-03"],
+               "platform": "seldon-custom",
+               "inputs": [{"name": "input", "datatype": "BYTES", "shape": [1]}],
+               "outputs": [{"name": "output", "datatype": "BYTES", "shape": [1]}]}
+    graph:
+      children: []
+      endpoint:
+        type: REST
+      name: my-metadata-model
+      type: MODEL
+    labels:
+      version: v1
+    name: my-metadata-graph
+    replicas: 1
