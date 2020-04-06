@@ -115,3 +115,38 @@ spec:
       version: v1
     name: my-metadata-graph
     replicas: 1
+
+
+---
+
+
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: seldon-metadata-sklearn
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: iris
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - name: classifier
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: MODEL_METADATA
+            value: |
+              {"name": "my-model-name",
+               "versions": ["my-sklearn-server"],
+               "platform": "seldon-custom",
+               "inputs": [{"name": "input", "datatype": "BYTES", "shape": [4]}],
+               "outputs": [{"name": "output", "datatype": "BYTES", "shape": [1]}]}
+    graph:
+      children: []
+      implementation: SKLEARN_SERVER
+      modelUri: gs://seldon-models/sklearn/iris
+      name: classifier
+    name: default
+    replicas: 1

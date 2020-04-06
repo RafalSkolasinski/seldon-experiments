@@ -59,3 +59,4 @@ request-metadata:
 	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-01/api/v1.0/metadata/my-metadata-model | jq .
 	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-02/api/v1.0/metadata/my-metadata-model | jq .
 	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-03/api/v1.0/metadata/my-metadata-model | jq .
+	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-sklearn/api/v1.0/metadata/classifier| jq .
