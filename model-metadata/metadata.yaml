@@ -1,0 +1,14 @@
+name: my-model-name
+versions:
+- my-model-version-02-yml
+platform: seldon-custom
+inputs:
+- datatype: BYTES
+  name: input
+  shape:
+  - 1
+outputs:
+- datatype: BYTES
+  name: output
+  shape:
+  - 1

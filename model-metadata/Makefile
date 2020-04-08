@@ -18,8 +18,8 @@ kind-load-image: image
 	kind load docker-image metadata-model:latest --name ${KIND_NAME}
 
 
-# local-run:
-# 	PREDICTIVE_UNIT_SERVICE_PORT=${LOCALHOST_PORT} seldon-core-microservice Model REST --service-type MODEL --log-level DEBUG
+local-run:
+	PREDICTIVE_UNIT_SERVICE_PORT=${LOCALHOST_PORT} seldon-core-microservice Model REST --service-type MODEL --log-level DEBUG
 
 # local-run-grpc:
 # 	PREDICTIVE_UNIT_SERVICE_PORT=${LOCALHOST_PORT} seldon-core-microservice Model GRPC --service-type MODEL --log-level DEBUG
@@ -46,17 +46,17 @@ kind-load-image: image
 
 request:
 	curl -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
-		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-01/api/v1.0/predictions  | jq .
+		-d '{"data": {"names": ["input"], "ndarray": ["data"]}}' \
+		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-model-01/api/v1.0/predictions  | jq .
 	curl -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
-		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-02/api/v1.0/predictions  | jq .
+		-d '{"data": {"names": ["input"], "ndarray": ["data"]}}' \
+		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-model-02-yml/api/v1.0/predictions  | jq .
 	curl -X POST -H 'Content-Type: application/json' \
-		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
-		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-03/api/v1.0/predictions  | jq .
+		-d '{"data": {"names": ["input"], "ndarray": ["data"]}}' \
+		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-model-02-env/api/v1.0/predictions  | jq .
 
 request-metadata:
-	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-01/api/v1.0/metadata/my-metadata-model | jq .
-	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-02/api/v1.0/metadata/my-metadata-model | jq .
-	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-model-03/api/v1.0/metadata/my-metadata-model | jq .
-	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-metadata-sklearn/api/v1.0/metadata/classifier| jq .
+	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-model-01/api/v1.0/metadata/my-metadata-model | jq .
+	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-model-02-yml/api/v1.0/metadata/my-metadata-model | jq .
+	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-model-02-env/api/v1.0/metadata/my-metadata-model | jq .
+	curl -s http://localhost:${AMBASSADOR_PORT}/seldon/seldon/metadata-sklearn/api/v1.0/metadata/classifier| jq .

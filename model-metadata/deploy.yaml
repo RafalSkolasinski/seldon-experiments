@@ -3,7 +3,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-metadata-model-01
+  name: metadata-model-01
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -38,7 +38,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-metadata-model-02
+  name: metadata-model-02-yml
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -55,13 +55,6 @@ spec:
             value: DEBUG
           - name: MODEL_NAME
             value: Model02
-          - name: MODEL_METADATA
-            value: |
-              {"name": "my-model-name",
-               "versions": ["my-model-version-02"],
-               "platform": "seldon-custom",
-               "inputs": [{"name": "input", "datatype": "BYTES", "shape": [1]}],
-               "outputs": [{"name": "output", "datatype": "BYTES", "shape": [1]}]}
     graph:
       children: []
       endpoint:
@@ -81,7 +74,7 @@ kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
-  name: seldon-metadata-model-03
+  name: metadata-model-02-env
 spec:
   annotations:
     seldon.io/executor: "true"
@@ -97,11 +90,11 @@ spec:
           - name: SELDON_LOG_LEVEL
             value: DEBUG
           - name: MODEL_NAME
-            value: Model03
+            value: Model02
           - name: MODEL_METADATA
             value: |
               {"name": "my-model-name",
-               "versions": ["my-model-version-03"],
+               "versions": ["my-model-version-02-env"],
                "platform": "seldon-custom",
                "inputs": [{"name": "input", "datatype": "BYTES", "shape": [1]}],
                "outputs": [{"name": "output", "datatype": "BYTES", "shape": [1]}]}
@@ -123,7 +116,7 @@ spec:
 apiVersion: machinelearning.seldon.io/v1alpha2
 kind: SeldonDeployment
 metadata:
-  name: seldon-metadata-sklearn
+  name: metadata-sklearn
 spec:
   annotations:
     seldon.io/executor: "true"
