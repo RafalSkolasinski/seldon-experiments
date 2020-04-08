@@ -55,6 +55,8 @@ spec:
             value: DEBUG
           - name: MODEL_NAME
             value: Model02
+          - name: MODEL_METADATA_FILE
+            value: my-meta-file.yaml
     graph:
       children: []
       endpoint:
