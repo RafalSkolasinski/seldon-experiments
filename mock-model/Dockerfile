@@ -1,4 +1,4 @@
-FROM seldonio/seldon-core-s2i-python37:0.19-SNAPSHOT
+FROM seldonio/seldon-core-s2i-python37:1.1.0-SNAPSHOT
 
 ENV MODEL_NAME Model
 ENV API_TYPE REST

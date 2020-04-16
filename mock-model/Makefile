@@ -34,17 +34,17 @@ docker-rm:
 
 
 
-request-localhost:
+local-request:
 	curl -X POST -H 'Content-Type: application/json' \
 		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
-		http://localhost:${LOCALHOST_PORT}/api/v0.1/predictions | jq .
+		http://localhost:${LOCALHOST_PORT}/api/v1.0/predictions | jq .
 
-request-localhost-grpc:
+local-request-grpc:
 	cd ${SELDON_CORE_DIR}/executor/proto && grpcurl \
 		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		-plaintext -proto ./prediction.proto  0.0.0.0:5000 seldon.protos.Seldon/Predict
 
-request-k8s:
+request:
 	curl -X POST -H 'Content-Type: application/json' \
 		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-mock-model/api/v1.0/predictions  | jq .
