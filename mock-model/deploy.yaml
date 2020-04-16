@@ -17,6 +17,9 @@ spec:
         - image: mock-model:latest
           imagePullPolicy: IfNotPresent
           name: my-mock-model
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
     graph:
       children: []
       endpoint:
