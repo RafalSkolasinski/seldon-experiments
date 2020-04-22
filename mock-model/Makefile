@@ -48,3 +48,7 @@ request:
 	curl -X POST -H 'Content-Type: application/json' \
 		-d '{"meta": {"tags": {"a": -1, "foo": "bar"}}, "data": {"names": ["input"], "ndarray": ["data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/seldon-mock-model/api/v1.0/predictions  | jq .
+
+
+request-metrics:
+	curl -s http://localhost:8003/seldon/seldon/seldon-mock-model/prometheus
