@@ -1,0 +1,144 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: misc-single
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: "parent model"
+    graph:
+      children: []
+      name: model
+      type: MODEL
+    name: default
+    replicas: 1
+
+
+---
+
+
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: misc-chain
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-1
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-1
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-2
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-2
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-3
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-3
+
+    graph:
+      name: model-1
+      type: MODEL
+      children:
+      - name: model-2
+        type: MODEL
+        children:
+        - name: model-3
+          type: MODEL
+    name: default
+    replicas: 1
+
+
+
+---
+
+
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: misc-forked-chain
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-1
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-1
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-2a
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-2a
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-2b
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-2b
+
+    graph:
+      name: model-1
+      type: MODEL
+      children:
+      - name: model-2a
+        type: MODEL
+      - name: model-2b
+        type: MODEL
+    name: default
+    replicas: 1
