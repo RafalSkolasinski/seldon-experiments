@@ -10,3 +10,8 @@ class Model():
         logging.warning(X)
         logging.warning(feature_names)
         return np.append(X, [name])
+
+    def aggregate(self, X, feature_names=[]):
+        logging.warning(X)
+        logging.warning(feature_names)
+        return np.append(np.concatenate(X), [name])

@@ -142,3 +142,61 @@ spec:
         type: MODEL
     name: default
     replicas: 1
+
+
+
+---
+
+
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  labels:
+    app: seldon
+  name: misc-combiner
+spec:
+  annotations:
+    seldon.io/executor: "true"
+  name: deployment
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-1-combiner
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-1-combiner
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-2a
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-2a
+
+        - image: misc-model:latest
+          imagePullPolicy: IfNotPresent
+          name: model-2b
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+          - name: NAME
+            value: model-2b
+
+    graph:
+      name: model-1-combiner
+      type: COMBINER
+      children:
+      - name: model-2a
+        type: MODEL
+      - name: model-2b
+        type: MODEL
+    name: default
+    replicas: 1

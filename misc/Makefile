@@ -34,3 +34,8 @@ request-forked-chain:
 	curl -s -H 'Content-Type: application/json' \
 		-d '{"data": {"names": ["input"], "ndarray": ["input-data"]}}' \
 		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/misc-forked-chain/api/v1.0/predictions  | jq .
+
+request-combiner:
+	curl -s -H 'Content-Type: application/json' \
+		-d '{"data": {"names": ["input"], "ndarray": ["input-data"]}}' \
+		http://localhost:${AMBASSADOR_PORT}/seldon/seldon/misc-combiner/api/v1.0/predictions  | jq .
