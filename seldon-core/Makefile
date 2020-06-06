@@ -21,8 +21,8 @@ OPERATOR_VERSION ?= 1.1.1-rc
 ENGINE_IMAGE ?= seldonio/engine
 ENGINE_VERSION ?= 1.1.1-rc
 
-
 EXECUTOR_ENABLED ?= true
+
 AMBASSADOR_ENABLED ?= true
 ISTIO_ENABLED ?= false
 
@@ -74,6 +74,19 @@ seldon-core-analytics:
 	   --namespace ${SELDON_CORE_OPERATOR_NAMESPACE}
 
 
+minio:
+	kubectl create ns minio-system || echo "namespace minio-system exists"
+	helm install minio stable/minio \
+	    --set accessKey=minioadmin \
+	    --set secretKey=minioadmin \
+	    --namespace minio-system
+	kubectl apply -f minio-secret.yaml
+
+minio-mc:
+	GO111MODULE=on go get github.com/minio/mc
+	mc config host add minio-seldon http://localhost:8090 minioadmin minioadmin
+
+
 tempdir:
 	mkdir -p ${TEMPRESOURCES_DIR}
 
@@ -83,9 +96,15 @@ clean:
 
 kind-cluster:
 	kind create cluster --name ${KIND_NAME}
+	kubectl create ns seldon
+	kubectl config set-context --current --namespace=seldon
 
 kind-delete:
 	kind delete cluster --name ${KIND_NAME}
 
+
 port-forward:
 	kubectl port-forward -n ambassador svc/ambassador 8003:80
+
+port-forward-minio:
+	kubectl port-forward -n minio-system svc/minio 8090:9000
