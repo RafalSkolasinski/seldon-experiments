@@ -1,50 +1,68 @@
-apiVersion: machinelearning.seldon.io/v1alpha2
+apiVersion: machinelearning.seldon.io/v1
 kind: SeldonDeployment
 metadata:
   labels:
     app: seldon
   name: combiner-experiments
 spec:
-  annotations:
-    project_name: Iris classification
   name: combiner-experiments
   predictors:
   - componentSpecs:
     - spec:
         containers:
-        - image: seldon-experiments:model-1
-          name: model-one
+        - name: model-a
+          image: combiner-test:latest
           imagePullPolicy: IfNotPresent
           env:
+          - name: MODEL_NAME
+            value: ModelA
+
           - name: SELDON_LOG_LEVEL
             value: DEBUG
-        - image: seldon-experiments:model-2
-          name: model-two
+
+          - name: SELDON_DEBUG
+            value: "true"
+
+        - name: model-b
+          image: combiner-test:latest
           imagePullPolicy: IfNotPresent
           env:
+          - name: MODEL_NAME
+            value: ModelB
+
           - name: SELDON_LOG_LEVEL
             value: DEBUG
-        - image: seldon-experiments:combiner
-          name: combiner
+
+          - name: SELDON_DEBUG
+            value: "true"
+
+        - name: combiner
+          image: combiner-test:latest
           imagePullPolicy: IfNotPresent
           env:
+          - name: MODEL_NAME
+            value: Combiner
+
           - name: SELDON_LOG_LEVEL
             value: DEBUG
+
+          - name: SELDON_DEBUG
+            value: "true"
+
     graph:
-      children:
-      - children: []
-        endpoint:
-          type: REST
-        name: model-one
-        type: MODEL
-      - children: []
-        endpoint:
-          type: REST
-        name: model-two
-        type: MODEL
-      endpoint:
-        type: REST
       name: combiner
       type: COMBINER
+      children:
+
+      - name: model-a
+        type: MODEL
+
+      - name: model-b
+        type: MODEL
+
     name: combiner-graph
     replicas: 1
+    svcOrchSpec:
+      env:
+      - name: SELDON_LOG_LEVEL
+        value: INFO

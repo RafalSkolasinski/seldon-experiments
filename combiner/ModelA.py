@@ -1,9 +1,9 @@
 import logging
 
 
-class Model():
+class ModelA():
 
     def predict(self, X, feature_names=[]):
         logging.warning(X)
         logging.warning(feature_names)
-        return ["model-2"]
+        return ["model-A"]

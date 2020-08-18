@@ -1,15 +1,15 @@
-all:
+KIND_NAME ?= seldon
 
-.ONESHELL:
+LOCALHOST_PORT ?= 5000
+AMBASSADOR_PORT ?= 8003
 
-images:
-	s2i build model-1 seldonio/seldon-core-s2i-python37:0.14 seldon-experiments:model-1
-	s2i build model-2 seldonio/seldon-core-s2i-python37:0.14 seldon-experiments:model-2
-	s2i build combiner seldonio/seldon-core-s2i-python37:0.14 seldon-experiments:combiner
 
-minikube_images:
-	eval $$(minikube docker-env)
-	make images
+image:
+	docker build . -t combiner-test:latest
+
+kind-load-image: image
+	kind load docker-image combiner-test:latest --name ${KIND_NAME}
+
 
 deploy:
 	kubectl apply -f deploy.yaml
@@ -17,11 +17,8 @@ deploy:
 remove:
 	kubectl delete -f deploy.yaml
 
-restart:
-	kubectl delete pod -l seldon-deployment-id=combiner-experiments-combiner-experiments
 
-
-send_request:
+request:
 	curl -X POST -H 'Content-Type: application/json' \
-		-d "{'data': {'names': ['get'], 'ndarray': ['data']}}" \
-		http://localhost:8003/seldon/seldon/combiner-experiments/api/v0.1/predictions
+		-d '{"data": {"names": ["input"], "ndarray": ["data"]}}' \
+		http://localhost:8003/seldon/seldon/combiner-experiments/api/v1.0/predictions | jq .
