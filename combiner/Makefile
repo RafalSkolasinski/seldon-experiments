@@ -20,5 +20,5 @@ remove:
 
 request:
 	curl -X POST -H 'Content-Type: application/json' \
-		-d '{"data": {"names": ["input"], "ndarray": ["data"]}}' \
+		-d '{"data": {"names": ["feature1"], "ndarray": [[0]]}}' \
 		http://localhost:8003/seldon/seldon/combiner-experiments/api/v1.0/predictions | jq .
