@@ -7,3 +7,6 @@ class ModelA():
         logging.warning(X)
         logging.warning(feature_names)
         return ["model-A"]
+
+    def tags(self):
+        return {"uri": "model-a"}
