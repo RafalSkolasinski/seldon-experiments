@@ -52,13 +52,20 @@ spec:
     graph:
       name: combiner
       type: COMBINER
+      endpoint:
+        type: REST
+
       children:
 
       - name: model-a
         type: MODEL
+        endpoint:
+          type: REST
 
       - name: model-b
         type: MODEL
+        endpoint:
+          type: REST
 
     name: combiner-graph
     replicas: 1
