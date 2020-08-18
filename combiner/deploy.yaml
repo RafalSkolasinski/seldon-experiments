@@ -20,8 +20,8 @@ spec:
           - name: SELDON_LOG_LEVEL
             value: DEBUG
 
-          - name: SELDON_DEBUG
-            value: "true"
+          # - name: SELDON_DEBUG
+          #   value: "true"
 
         - name: model-b
           image: combiner-test:latest
@@ -33,8 +33,8 @@ spec:
           - name: SELDON_LOG_LEVEL
             value: DEBUG
 
-          - name: SELDON_DEBUG
-            value: "true"
+          # - name: SELDON_DEBUG
+          #   value: "true"
 
         - name: combiner
           image: combiner-test:latest
@@ -46,8 +46,8 @@ spec:
           - name: SELDON_LOG_LEVEL
             value: DEBUG
 
-          - name: SELDON_DEBUG
-            value: "true"
+          # - name: SELDON_DEBUG
+          #   value: "true"
 
     graph:
       name: combiner

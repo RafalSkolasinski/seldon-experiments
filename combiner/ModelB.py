@@ -6,7 +6,7 @@ class ModelB():
     def predict(self, X, feature_names=[]):
         logging.warning(X)
         logging.warning(feature_names)
-        return ["model-B"]
+        return [1]
 
 
     def tags(self):
